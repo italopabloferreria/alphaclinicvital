@@ -209,7 +209,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
 
         {/* [MOBILE-ONLY]: Indicador de toque na base da hero */}
         {isTouchDevice && (
-          <div className="pointer-events-none absolute inset-x-0 bottom-24 z-20 flex justify-center px-6 sm:hidden">
+          <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center px-6 sm:hidden">
             <div className="rounded-full border border-white/10 bg-black/40 px-4 py-2 text-[11px] tracking-[0.08em] text-white/90 shadow-[0_8px_24px_rgba(0,0,0,0.22)] backdrop-blur-sm">
               {mobileRevealed ? 'Toque novamente' : 'Toque para revelar'}
             </div>
