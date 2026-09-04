@@ -49,11 +49,11 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               </p>
 
               <div className="pt-2 grid grid-cols-2 gap-4 text-xs font-medium text-[#28242C]">
-                <div className="p-4 border border-[#A59A91]/25 bg-[#FAF4EF]">
+                <div className="glass-card">
                   <p className="font-semibold text-sm mb-1 text-[#28242C]">Privacidade Absoluta</p>
                   <p className="text-[#A59A91]">Atendimento individual sem espera coletiva.</p>
                 </div>
-                <div className="p-4 border border-[#A59A91]/25 bg-[#FAF4EF]">
+                <div className="glass-card">
                   <p className="font-semibold text-sm mb-1 text-[#28242C]">Localização Nobre</p>
                   <p className="text-[#A59A91]">Estacionamento privativo e fácil acesso.</p>
                 </div>
@@ -63,7 +63,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 <button
                   type="button"
                   onClick={() => onNavigate('sobre')}
-                  className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#A74447] hover:text-[#8F393C] transition-colors"
+                  className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#A74447] hover:text-[#8F393C] transition-colors cursor-pointer"
                 >
                   <Award className="w-4 h-4" />
                   <span>Conheça nossa clínica e corpo clínico &rarr;</span>
@@ -72,7 +72,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             </div>
 
             <div className="lg:col-span-6">
-              <div className="border border-[#A59A91]/25 bg-[#FAF4EF] p-8 sm:p-10 space-y-6">
+              <div className="glass-card space-y-6">
                 <h3
                   className="text-2xl font-serif text-[#28242C]"
                   style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
@@ -88,7 +88,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                   <button
                     type="button"
                     onClick={() => onNavigate('contato')}
-                    className="w-full py-4 border border-[#A74447] bg-[#A74447] hover:bg-[#8F393C] text-[#F5E9DF] text-xs font-semibold uppercase tracking-widest transition-all cursor-pointer shadow-sm"
+                    className="w-full py-4 border border-[#A74447] bg-[#A74447] hover:bg-[#8F393C] text-[#F5E9DF] text-xs font-semibold uppercase tracking-widest transition-all cursor-pointer shadow-sm rounded-xl"
                   >
                     Agendar Horário com Especialista
                   </button>

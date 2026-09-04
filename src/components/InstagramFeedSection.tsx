@@ -124,12 +124,12 @@ export const InstagramFeedSection: React.FC = () => {
             </a>
 
             {/* Slider Arrow Controls */}
-            <div className="flex items-center gap-1.5 ml-2">
+            <div className="flex items-center gap-2 ml-2">
               <button
                 type="button"
                 onClick={prevSlide}
                 aria-label="Post anterior"
-                className="w-10 h-10 border border-[#A59A91]/40 hover:border-[#A74447] bg-[#F5E9DF] hover:bg-[#A74447] hover:text-white text-[#28242C] flex items-center justify-center transition-all cursor-pointer"
+                className="glass-button-circle text-[#28242C] hover:text-[#A74447] transition-all cursor-pointer"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
@@ -137,7 +137,7 @@ export const InstagramFeedSection: React.FC = () => {
                 type="button"
                 onClick={nextSlide}
                 aria-label="Próximo post"
-                className="w-10 h-10 border border-[#A59A91]/40 hover:border-[#A74447] bg-[#F5E9DF] hover:bg-[#A74447] hover:text-white text-[#28242C] flex items-center justify-center transition-all cursor-pointer"
+                className="glass-button-circle text-[#28242C] hover:text-[#A74447] transition-all cursor-pointer"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>
@@ -163,7 +163,7 @@ export const InstagramFeedSection: React.FC = () => {
                     href="https://www.instagram.com/alphaclinicvital/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block group border border-[#A59A91]/25 bg-[#F5E9DF] overflow-hidden transition-all duration-300 hover:border-[#A74447] hover:shadow-xl hover:-translate-y-1"
+                    className="block group glass-card !p-0 overflow-hidden transition-all duration-300 hover:-translate-y-1"
                   >
                     {/* Post Image Container with Overlay */}
                     <div className="relative aspect-square overflow-hidden bg-[#FAF4EF]">
@@ -176,7 +176,7 @@ export const InstagramFeedSection: React.FC = () => {
                       {/* Gradient Vignette */}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-5 text-white">
                         <div className="flex justify-end">
-                          <div className="w-9 h-9 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center">
+                          <div className="glass-button-circle text-white">
                             <Instagram className="w-5 h-5 text-white" />
                           </div>
                         </div>
@@ -194,7 +194,7 @@ export const InstagramFeedSection: React.FC = () => {
                       </div>
 
                       {/* Small floating Instagram icon in corner */}
-                      <div className="absolute top-3.5 right-3.5 w-7 h-7 rounded-full bg-[#FAF4EF]/90 backdrop-blur-sm flex items-center justify-center text-[#28242C] shadow-sm group-hover:opacity-0 transition-opacity">
+                      <div className="absolute top-3.5 right-3.5 w-7 h-7 rounded-full glass-pill flex items-center justify-center text-[#28242C] shadow-sm group-hover:opacity-0 transition-opacity">
                         <Instagram className="w-3.5 h-3.5 text-[#A74447]" />
                       </div>
                     </div>

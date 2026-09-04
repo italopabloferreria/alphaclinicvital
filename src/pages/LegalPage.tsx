@@ -39,10 +39,10 @@ export const LegalPage: React.FC<LegalPageProps> = ({ initialTab = 'privacidade'
           <button
             type="button"
             onClick={() => setActiveTab('privacidade')}
-            className={`px-6 py-2.5 text-xs uppercase tracking-widest font-medium transition-all cursor-pointer ${
+            className={`glass-pill px-6 py-2.5 text-xs uppercase tracking-widest font-medium transition-all cursor-pointer ${
               activeTab === 'privacidade'
-                ? 'bg-[#A74447] text-[#F5E9DF] border border-[#A74447] shadow-sm'
-                : 'bg-[#FAF4EF] text-[#28242C] border border-[#A59A91]/30 hover:border-[#A74447]'
+                ? '!bg-[#A74447] text-white shadow-sm'
+                : 'text-[#28242C] hover:text-[#A74447]'
             }`}
           >
             Política de Privacidade
@@ -50,10 +50,10 @@ export const LegalPage: React.FC<LegalPageProps> = ({ initialTab = 'privacidade'
           <button
             type="button"
             onClick={() => setActiveTab('termos')}
-            className={`px-6 py-2.5 text-xs uppercase tracking-widest font-medium transition-all cursor-pointer ${
+            className={`glass-pill px-6 py-2.5 text-xs uppercase tracking-widest font-medium transition-all cursor-pointer ${
               activeTab === 'termos'
-                ? 'bg-[#A74447] text-[#F5E9DF] border border-[#A74447] shadow-sm'
-                : 'bg-[#FAF4EF] text-[#28242C] border border-[#A59A91]/30 hover:border-[#A74447]'
+                ? '!bg-[#A74447] text-white shadow-sm'
+                : 'text-[#28242C] hover:text-[#A74447]'
             }`}
           >
             Termos de Uso
@@ -61,10 +61,10 @@ export const LegalPage: React.FC<LegalPageProps> = ({ initialTab = 'privacidade'
           <button
             type="button"
             onClick={() => setActiveTab('cookies')}
-            className={`px-6 py-2.5 text-xs uppercase tracking-widest font-medium transition-all cursor-pointer ${
+            className={`glass-pill px-6 py-2.5 text-xs uppercase tracking-widest font-medium transition-all cursor-pointer ${
               activeTab === 'cookies'
-                ? 'bg-[#A74447] text-[#F5E9DF] border border-[#A74447] shadow-sm'
-                : 'bg-[#FAF4EF] text-[#28242C] border border-[#A59A91]/30 hover:border-[#A74447]'
+                ? '!bg-[#A74447] text-white shadow-sm'
+                : 'text-[#28242C] hover:text-[#A74447]'
             }`}
           >
             Política de Cookies
@@ -75,7 +75,7 @@ export const LegalPage: React.FC<LegalPageProps> = ({ initialTab = 'privacidade'
       {/* Tab Content */}
       <section className="py-16 sm:py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="border border-[#A59A91]/25 bg-[#FAF4EF] p-8 sm:p-14 space-y-10 text-[#28242C]/85 text-sm sm:text-base leading-relaxed shadow-sm">
+          <div className="glass-card !p-8 sm:!p-14 space-y-10 text-[#28242C]/85 text-sm sm:text-base leading-relaxed shadow-sm">
             
             {activeTab === 'privacidade' && (
               <div className="space-y-6">

@@ -143,7 +143,7 @@ export const ProceduresSection: React.FC<ProceduresSectionProps> = ({ onNavigate
                   />
                   {/* Floating badge over image */}
                   <div className="absolute bottom-5 left-5 sm:bottom-6 sm:left-6">
-                    <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#FAF4EF]/90 backdrop-blur-md text-[#28242C] text-xs font-semibold shadow-sm">
+                    <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 glass-pill text-[#28242C] text-xs font-semibold shadow-sm">
                       <Sparkles className="w-3.5 h-3.5 text-[#A74447]" />
                       <span>{current.name}</span>
                     </span>
@@ -205,10 +205,10 @@ export const ProceduresSection: React.FC<ProceduresSectionProps> = ({ onNavigate
                   key={proc.name}
                   type="button"
                   onClick={() => handleSelectProcedure(index)}
-                  className={`w-full text-left p-4 sm:p-5 rounded-xl border transition-all duration-300 flex items-center justify-between group cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A74447] ${
+                  className={`w-full text-left glass-card !p-4 sm:!p-5 transition-all duration-300 flex items-center justify-between group cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A74447] ${
                     isActive
-                      ? 'bg-[#F5E9DF] border-[#A74447] shadow-sm translate-x-1 sm:translate-x-2'
-                      : 'bg-[#FAF4EF]/80 border-[#A59A91]/25 hover:border-[#A59A91]/60 hover:bg-[#F5E9DF]/60'
+                      ? 'shadow-sm translate-x-1 sm:translate-x-2 ring-1 ring-[#A74447]'
+                      : 'hover:scale-[1.01]'
                   }`}
                   aria-pressed={isActive}
                 >

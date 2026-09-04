@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Calendar, Check, ArrowRight, Clock, ShieldCheck } from 'lucide-react';
+import { Calendar, Check, ArrowRight, Clock, RotateCcw } from 'lucide-react';
 import { PageRoute } from '../types';
 import { TREATMENTS } from '../data/treatments';
 import { getProcedureSlugForTreatmentId } from '../data/procedures';
@@ -41,12 +41,12 @@ export const TreatmentsPage: React.FC<TreatmentsPageProps> = ({ onNavigate }) =>
 
       {/* Filter Tabs */}
       <section className="py-8 border-b border-[#A59A91]/25 bg-[#F5E9DF]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-center flex-wrap gap-2 sm:gap-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-center flex-wrap gap-2.5 sm:gap-4">
           {[
             { id: 'todos', label: 'Todos os Procedimentos' },
-            { id: 'facial', label: 'Face & Rejuvenescimento' },
+            { id: 'facial', label: 'Face e Rejuvenescimento' },
             { id: 'corporal', label: 'Remodelação Corporal' },
-            { id: 'laser', label: 'Tecnologias a Laser' },
+            { id: 'laser', label: 'Tecnologias e Laser' },
           ].map((cat) => {
             const isActive = activeCategory === cat.id;
             return (
@@ -54,10 +54,10 @@ export const TreatmentsPage: React.FC<TreatmentsPageProps> = ({ onNavigate }) =>
                 key={cat.id}
                 type="button"
                 onClick={() => setActiveCategory(cat.id as FilterCategory)}
-                className={`px-5 py-2.5 text-xs uppercase tracking-widest font-medium transition-all cursor-pointer ${
+                className={`glass-pill px-5 py-2.5 text-xs uppercase tracking-widest font-medium transition-all duration-200 cursor-pointer ${
                   isActive
-                    ? 'bg-[#A74447] text-[#F5E9DF] border border-[#A74447] shadow-sm'
-                    : 'bg-[#FAF4EF] text-[#28242C]/80 border border-[#A59A91]/30 hover:border-[#A74447]'
+                    ? '!bg-[#A74447] text-[#F5E9DF] shadow-sm'
+                    : 'text-[#28242C]/80 hover:text-[#28242C]'
                 }`}
               >
                 {cat.label}
@@ -67,63 +67,200 @@ export const TreatmentsPage: React.FC<TreatmentsPageProps> = ({ onNavigate }) =>
         </div>
       </section>
 
-      {/* Treatments List */}
+      {/* Treatments Cards Grid Section */}
       <section className="py-16 sm:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-          {filteredTreatments.map((treatment) => {
-            const IconComp = treatment.icon;
+        <div className="max-w-6xl mx-auto px-4 md:px-8">
+          <div
+            key={activeCategory}
+            className="cards-fade-in grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8"
+          >
+            {filteredTreatments.map((treatment, index) => {
+              const IconComp = treatment.icon;
+              const isFeatured = index === 0;
 
-            return (
-              <article
-                key={treatment.id}
-                id={treatment.id}
-                className="border border-[#A59A91]/25 bg-[#FAF4EF] p-8 sm:p-12 transition-all hover:border-[#A74447] shadow-sm"
-              >
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                  
-                  {/* Left Column: Icon + Overview */}
-                  <div className="lg:col-span-4 space-y-4">
-                    <div className="w-14 h-14 border border-[#A74447]/30 bg-[#F5E9DF] text-[#A74447] flex items-center justify-center">
-                      <IconComp className="w-7 h-7" />
+              // Featured Card (First item in list - "Mais Procurado")
+              if (isFeatured) {
+                return (
+                  <article
+                    key={treatment.id}
+                    id={treatment.id}
+                    className="treatment-card md:col-span-2 flex flex-col h-full overflow-hidden"
+                  >
+                    <div className="flex flex-col md:flex-row md:gap-8 lg:gap-10 h-full">
+                      {/* Left Column (Desktop md+): Thumbnail + Floating Badge + Icon + Desktop Metadata */}
+                      <div className="flex flex-col md:w-5/12 lg:w-5/12 shrink-0">
+                        {/* Miniature Photo Container */}
+                        <div className="relative w-full h-56 sm:h-64 md:h-72 lg:h-80 rounded-2xl overflow-hidden border border-[#783c28]/15 bg-[#FAF4EF] group">
+                          {treatment.image && (
+                            <img
+                              src={treatment.image}
+                              alt={treatment.title}
+                              className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+                              loading="lazy"
+                            />
+                          )}
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10 pointer-events-none" />
+
+                          {/* 1. Floating Badge no topo da foto */}
+                          <div className="absolute top-3.5 left-3.5 z-10">
+                            <span
+                              className="inline-flex items-center px-3 py-1 glass-pill text-xs font-semibold uppercase tracking-wide text-[#A74447] shadow-sm"
+                            >
+                              {treatment.tag || 'Mais Procurado'}
+                            </span>
+                          </div>
+
+                          {/* Ícone discreto no canto da foto */}
+                          <div className="absolute bottom-3.5 right-3.5 z-10 glass-button-circle text-[#A74447] shadow-sm">
+                            <IconComp className="w-5 h-5 text-[#A74447]" strokeWidth={1.5} />
+                          </div>
+                        </div>
+
+                        {/* Metadados no Desktop */}
+                        <div className="hidden md:flex items-center justify-between pt-3 text-xs text-neutral-600 border-t border-[#783c28]/10 mt-3">
+                          <div className="flex items-center gap-1.5">
+                            <Clock className="w-3.5 h-3.5 text-[#A74447]" strokeWidth={1.5} />
+                            <span>Duração: <strong className="text-[#28242C] font-medium">{treatment.duration}</strong></span>
+                          </div>
+                          <div className="flex items-center gap-1.5">
+                            <RotateCcw className="w-3.5 h-3.5 text-[#A74447]" strokeWidth={1.5} />
+                            <span>Recuperação: <strong className="text-[#28242C] font-medium">{treatment.recovery}</strong></span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Right Column (Desktop md+): Title, Description, Benefits, Mobile Meta, CTAs */}
+                      <div className="flex flex-col flex-1 h-full mt-4 md:mt-0">
+                        {/* 3. Título do tratamento */}
+                        <h2
+                          className="text-2xl md:text-3xl font-serif font-medium text-[#28242C] leading-snug"
+                          style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
+                        >
+                          {treatment.title}
+                        </h2>
+
+                        {/* 4. Descrição curta (1-2 frases) */}
+                        <p className="mt-2.5 text-sm text-neutral-600 leading-relaxed">
+                          {treatment.description}
+                        </p>
+
+                        {/* 5. Lista de 2-3 benefícios principais com check fino */}
+                        <div className="mt-5 space-y-2">
+                          <span className="text-xs uppercase tracking-wider font-semibold text-[#A74447]">
+                            Benefícios Principais
+                          </span>
+                          <ul className="space-y-2 pt-0.5">
+                            {(treatment.benefits || []).slice(0, 3).map((benefit, bIdx) => (
+                              <li key={bIdx} className="flex items-start gap-2.5 text-sm text-[#28242C]/85">
+                                <span className="text-[#A74447] shrink-0 mt-0.5">
+                                  <Check className="w-4 h-4" strokeWidth={1.5} />
+                                </span>
+                                <span className="leading-snug">{benefit}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        {/* 6. Metadados em linha (Mobile) */}
+                        <div className="flex md:hidden items-center flex-wrap gap-2 text-xs text-neutral-600 mt-4 pt-3 border-t border-[#783c28]/10">
+                          <div className="flex items-center gap-1.5">
+                            <Clock className="w-3.5 h-3.5 text-[#A74447]" strokeWidth={1.5} />
+                            <span>{treatment.duration}</span>
+                          </div>
+                          <span className="text-neutral-300 font-light">•</span>
+                          <div className="flex items-center gap-1.5">
+                            <RotateCcw className="w-3.5 h-3.5 text-[#A74447]" strokeWidth={1.5} />
+                            <span>{treatment.recovery}</span>
+                          </div>
+                        </div>
+
+                        {/* 7. Rodapé com dois CTAs */}
+                        <div className="mt-auto pt-6 flex flex-col sm:flex-row gap-3">
+                          <button
+                            type="button"
+                            onClick={() => onNavigate('contato')}
+                            className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-[#A74447] hover:bg-[#8F393C] text-[#F5E9DF] text-xs font-semibold uppercase tracking-widest transition-all active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer shadow-sm"
+                          >
+                            <Calendar className="w-4 h-4" strokeWidth={1.5} />
+                            <span>Agendar Sessão</span>
+                          </button>
+
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const slug = getProcedureSlugForTreatmentId(treatment.id);
+                              window.location.hash = `#/procedimento/${slug}`;
+                              onNavigate('procedimento');
+                            }}
+                            className="w-full sm:w-auto px-5 py-3.5 rounded-xl border border-[#28242C]/25 text-[#28242C] hover:border-[#28242C] hover:bg-[#28242C]/5 text-xs font-semibold uppercase tracking-widest transition-all active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer"
+                          >
+                            <span>Ler mais sobre o procedimento</span>
+                            <ArrowRight className="w-3.5 h-3.5" strokeWidth={1.5} />
+                          </button>
+                        </div>
+                      </div>
                     </div>
-                    
-                    <span className="inline-block text-[11px] font-semibold tracking-wider uppercase text-[#A74447]">
-                      {treatment.tag}
-                    </span>
+                  </article>
+                );
+              }
 
-                    <h2
-                      className="text-2xl sm:text-3xl font-serif font-medium text-[#28242C]"
-                      style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
-                    >
-                      {treatment.title}
-                    </h2>
+              // Standard Cards (2 Columns on md+)
+              return (
+                <article
+                  key={treatment.id}
+                  id={treatment.id}
+                  className="treatment-card flex flex-col h-full overflow-hidden"
+                >
+                  {/* Miniature photo container */}
+                  <div className="relative w-full h-44 sm:h-48 rounded-xl overflow-hidden mb-4 border border-[#783c28]/15 bg-[#FAF4EF] group">
+                    {treatment.image && (
+                      <img
+                        src={treatment.image}
+                        alt={treatment.title}
+                        className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+                        loading="lazy"
+                      />
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10 pointer-events-none" />
 
-                    <p className="text-sm text-[#28242C]/80 leading-relaxed font-normal">
-                      {treatment.description}
-                    </p>
+                    {/* 1. Selo/Badge no topo esquerdo da foto */}
+                    <div className="absolute top-3 left-3 z-10">
+                      <span
+                        className="inline-flex items-center px-2.5 py-1 glass-pill text-[11px] font-semibold uppercase tracking-wide text-[#A74447] shadow-sm"
+                      >
+                        {treatment.tag || 'Procedimento'}
+                      </span>
+                    </div>
 
-                    <div className="pt-2 flex flex-col gap-2 text-xs text-[#28242C]/70">
-                      <div className="flex items-center gap-2">
-                        <Clock className="w-3.5 h-3.5 text-[#A74447]" />
-                        <span><strong>Duração da sessão:</strong> {treatment.duration}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <ShieldCheck className="w-3.5 h-3.5 text-[#A74447]" />
-                        <span><strong>Tempo de recuperação:</strong> {treatment.recovery}</span>
-                      </div>
+                    {/* 2. Ícone discreto no canto inferior direito da foto */}
+                    <div className="absolute bottom-3 right-3 z-10 glass-button-circle !w-9 !h-9 text-[#A74447] shadow-sm">
+                      <IconComp className="w-4 h-4 text-[#A74447]" strokeWidth={1.5} />
                     </div>
                   </div>
 
-                  {/* Middle Column: Benefits List */}
-                  <div className="lg:col-span-5 space-y-4 lg:border-l lg:border-[#A59A91]/20 lg:pl-8">
-                    <h3 className="text-xs uppercase tracking-wider font-semibold text-[#A74447]">
-                      Benefícios Clínicos
-                    </h3>
-                    <ul className="space-y-3">
-                      {(treatment.benefits || []).map((benefit, idx) => (
-                        <li key={idx} className="flex items-start gap-3 text-sm text-[#28242C]/85">
-                          <span className="p-1 rounded-full bg-[#A74447]/15 text-[#A74447] shrink-0 mt-0.5">
-                            <Check className="w-3.5 h-3.5" />
+                  {/* 3. Título do tratamento */}
+                  <h3
+                    className="text-xl md:text-2xl font-serif font-medium text-[#28242C] leading-snug"
+                    style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
+                  >
+                    {treatment.title}
+                  </h3>
+
+                  {/* 4. Descrição curta */}
+                  <p className="mt-2 text-sm text-neutral-600 leading-relaxed">
+                    {treatment.description}
+                  </p>
+
+                  {/* 5. Lista de 2-3 benefícios principais com check fino */}
+                  <div className="mt-4 space-y-2">
+                    <span className="text-xs uppercase tracking-wider font-semibold text-[#A74447]">
+                      Benefícios Principais
+                    </span>
+                    <ul className="space-y-1.5 pt-0.5">
+                      {(treatment.benefits || []).slice(0, 3).map((benefit, bIdx) => (
+                        <li key={bIdx} className="flex items-start gap-2 text-sm text-[#28242C]/85">
+                          <span className="text-[#A74447] shrink-0 mt-0.5">
+                            <Check className="w-4 h-4" strokeWidth={1.5} />
                           </span>
                           <span className="leading-snug">{benefit}</span>
                         </li>
@@ -131,51 +268,53 @@ export const TreatmentsPage: React.FC<TreatmentsPageProps> = ({ onNavigate }) =>
                     </ul>
                   </div>
 
-                  {/* Right Column: CTAs */}
-                  <div className="lg:col-span-3 flex flex-col justify-between h-full space-y-6 lg:border-l lg:border-[#A59A91]/20 lg:pl-8">
-                    <div className="space-y-1">
-                      <span className="text-xs uppercase tracking-wider text-[#A59A91] block">
-                        Atendimento Exclusivo
-                      </span>
-                      <p className="text-xs text-[#28242C]/70 leading-relaxed">
-                        Consulte disponibilidade de horários no AlphaCenter, Jardim Botânico.
-                      </p>
+                  {/* 6. Metadados em linha */}
+                  <div className="mt-4 pt-3 border-t border-[#783c28]/10 flex items-center flex-wrap gap-2 text-xs text-neutral-600">
+                    <div className="flex items-center gap-1.5">
+                      <Clock className="w-3.5 h-3.5 text-[#A74447]" strokeWidth={1.5} />
+                      <span>{treatment.duration}</span>
                     </div>
-
-                    <div className="space-y-2.5 pt-2">
-                      <button
-                        type="button"
-                        onClick={() => {
-                          const slug = getProcedureSlugForTreatmentId(treatment.id);
-                          window.location.hash = `#/procedimento/${slug}`;
-                          onNavigate('procedimento');
-                        }}
-                        className="w-full py-3 border border-[#28242C] text-[#28242C] hover:bg-[#28242C] hover:text-[#F5E9DF] text-xs font-semibold uppercase tracking-widest transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
-                      >
-                        <span>Ler mais sobre o procedimento</span>
-                        <ArrowRight className="w-3.5 h-3.5" />
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={() => onNavigate('contato')}
-                        className="w-full py-3.5 border border-[#A74447] bg-[#A74447] hover:bg-[#8F393C] text-[#F5E9DF] text-xs font-semibold uppercase tracking-widest transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-sm"
-                      >
-                        <Calendar className="w-3.5 h-3.5" />
-                        <span>Agendar Sessão</span>
-                      </button>
+                    <span className="text-neutral-300 font-light">•</span>
+                    <div className="flex items-center gap-1.5">
+                      <RotateCcw className="w-3.5 h-3.5 text-[#A74447]" strokeWidth={1.5} />
+                      <span>{treatment.recovery}</span>
                     </div>
                   </div>
 
-                </div>
-              </article>
-            );
-          })}
+                  {/* 7. Rodapé com dois CTAs */}
+                  <div className="mt-auto pt-6 flex flex-col md:flex-row gap-2.5">
+                    <button
+                      type="button"
+                      onClick={() => onNavigate('contato')}
+                      className="w-full md:flex-1 py-3 px-3 rounded-xl bg-[#A74447] hover:bg-[#8F393C] text-[#F5E9DF] text-[11px] lg:text-xs font-semibold uppercase tracking-wider transition-all active:scale-[0.98] flex items-center justify-center gap-1.5 cursor-pointer shadow-sm text-center"
+                    >
+                      <Calendar className="w-3.5 h-3.5" strokeWidth={1.5} />
+                      <span>Agendar Sessão</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const slug = getProcedureSlugForTreatmentId(treatment.id);
+                        window.location.hash = `#/procedimento/${slug}`;
+                        onNavigate('procedimento');
+                      }}
+                      className="w-full md:flex-1 py-3 px-3 rounded-xl border border-[#28242C]/25 text-[#28242C] hover:border-[#28242C] hover:bg-[#28242C]/5 text-[11px] lg:text-xs font-semibold uppercase tracking-wider transition-all active:scale-[0.98] flex items-center justify-center gap-1.5 cursor-pointer text-center"
+                    >
+                      <span className="md:hidden lg:inline">Ler mais sobre o procedimento</span>
+                      <span className="hidden md:inline lg:hidden">Ler mais</span>
+                      <ArrowRight className="w-3.5 h-3.5 shrink-0" strokeWidth={1.5} />
+                    </button>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
         </div>
       </section>
 
       {/* Bottom Help Banner */}
-      <section className="py-16 bg-[#FAF4EF] border-t border-[#A59A91]/25">
+      <section className="py-20 sm:py-28 bg-[#FAF4EF] border-t border-[#A59A91]/25">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
           <h3
             className="text-3xl font-serif text-[#28242C]"
@@ -190,7 +329,7 @@ export const TreatmentsPage: React.FC<TreatmentsPageProps> = ({ onNavigate }) =>
             <button
               type="button"
               onClick={() => onNavigate('contato')}
-              className="inline-flex items-center gap-2 px-8 py-4 bg-[#A74447] hover:bg-[#8F393C] text-[#F5E9DF] text-xs font-semibold uppercase tracking-widest transition-all cursor-pointer shadow-sm"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-[#A74447] hover:bg-[#8F393C] text-[#F5E9DF] text-xs font-semibold uppercase tracking-widest transition-all cursor-pointer shadow-sm rounded-xl"
             >
               <span>Solicitar Avaliação Médica</span>
               <ArrowRight className="w-4 h-4" />

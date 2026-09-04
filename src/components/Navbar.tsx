@@ -28,7 +28,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, onNavigate }) => {
   };
 
   return (
-    <header className="sticky top-0 z-[100] w-full border-b border-[#A59A91]/25 bg-[#F5E9DF]/95 backdrop-blur-md transition-all duration-300 shadow-sm">
+    <header className="sticky top-0 z-[100] w-full backdrop-blur-lg bg-white/10 border-b border-white/10 transition-all duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20 sm:h-24">
           
@@ -39,8 +39,8 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, onNavigate }) => {
             onClick={() => handleNavClick('home')}
           />
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-8 lg:gap-12">
+          {/* Desktop Navigation Links in glass-nav pill */}
+          <nav className="glass-nav hidden md:flex items-center gap-1">
             {NAV_ITEMS.map((item) => {
               const isActive = currentRoute === item.route;
               return (
@@ -48,19 +48,13 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, onNavigate }) => {
                   key={item.route}
                   type="button"
                   onClick={() => handleNavClick(item.route)}
-                  className={`relative text-xs lg:text-sm font-medium tracking-wider uppercase transition-all duration-200 py-1 font-sans ${
+                  className={`px-4 py-1.5 rounded-full text-xs lg:text-sm font-medium tracking-wider uppercase transition-all duration-200 cursor-pointer font-sans ${
                     isActive
-                      ? 'text-[#A74447] font-semibold'
-                      : 'text-[#28242C]/80 hover:text-[#A74447]'
+                      ? 'bg-white/20 text-[#A74447] font-semibold'
+                      : 'text-[#28242C]/80 hover:text-[#A74447] hover:bg-white/10'
                   }`}
                 >
                   {item.label}
-                  {isActive && (
-                    <span
-                      aria-hidden="true"
-                      className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#A74447] rounded-full"
-                    />
-                  )}
                 </button>
               );
             })}
@@ -73,41 +67,73 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, onNavigate }) => {
               onClick={toggleMobileMenu}
               aria-expanded={isMobileMenuOpen}
               aria-label={isMobileMenuOpen ? 'Fechar menu de navegação' : 'Abrir menu de navegação'}
-              className="p-2 rounded-md text-[#28242C] hover:bg-[#A59A91]/15 active:bg-[#A59A91]/25 transition-colors cursor-pointer"
+              className="glass-button-circle text-[#28242C] cursor-pointer"
             >
               {isMobileMenuOpen ? (
-                <X className="w-6 h-6" />
+                <X className="w-5 h-5" />
               ) : (
-                <Menu className="w-6 h-6" />
+                <Menu className="w-5 h-5" />
               )}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu Drawer */}
+      {/* Mobile Menu: glass-overlay + glass-drawer */}
       {isMobileMenuOpen && (
-        <div className="md:hidden border-b border-[#A59A91]/25 bg-[#FAF4EF] shadow-lg px-5 pt-3 pb-6 space-y-2">
-          <nav className="flex flex-col space-y-1">
-            {NAV_ITEMS.map((item) => {
-              const isActive = currentRoute === item.route;
-              return (
+        <>
+          {/* Background Overlay */}
+          <div
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="fixed inset-0 z-[110] glass-overlay transition-opacity"
+            aria-hidden="true"
+          />
+
+          {/* Sliding Drawer Panel */}
+          <div className="fixed top-0 right-0 bottom-0 w-72 sm:w-80 z-[120] glass-drawer p-6 flex flex-col justify-between shadow-2xl text-white">
+            <div className="space-y-6">
+              <div className="flex items-center justify-between border-b border-white/10 pb-4">
+                <span className="text-xs uppercase tracking-widest text-white/70 font-semibold font-sans">
+                  Navegação
+                </span>
                 <button
-                  key={item.route}
                   type="button"
-                  onClick={() => handleNavClick(item.route)}
-                  className={`text-left px-4 py-3 rounded-md text-sm font-medium tracking-wider uppercase transition-all ${
-                    isActive
-                      ? 'bg-[#A74447] text-[#F5E9DF] font-semibold'
-                      : 'text-[#28242C] hover:bg-[#A74447]/10 hover:text-[#A74447]'
-                  }`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="glass-button-circle text-white cursor-pointer"
+                  aria-label="Fechar menu"
                 >
-                  {item.label}
+                  <X className="w-5 h-5" />
                 </button>
-              );
-            })}
-          </nav>
-        </div>
+              </div>
+
+              <nav className="flex flex-col space-y-2">
+                {NAV_ITEMS.map((item) => {
+                  const isActive = currentRoute === item.route;
+                  return (
+                    <button
+                      key={item.route}
+                      type="button"
+                      onClick={() => handleNavClick(item.route)}
+                      className={`text-left px-4 py-3 rounded-2xl text-sm font-medium tracking-wider uppercase transition-all cursor-pointer ${
+                        isActive
+                          ? 'bg-white/20 text-[#DD9299] font-semibold'
+                          : 'text-white/80 hover:bg-white/10 hover:text-white'
+                      }`}
+                    >
+                      {item.label}
+                    </button>
+                  );
+                })}
+              </nav>
+            </div>
+
+            <div className="pt-6 border-t border-white/10 text-xs text-white/60 space-y-1">
+              <p className="font-semibold text-white/80">Alpha Clinic Vital</p>
+              <p>AlphaCenter, Jardim Botânico</p>
+              <p>Brasília - DF</p>
+            </div>
+          </div>
+        </>
       )}
     </header>
   );

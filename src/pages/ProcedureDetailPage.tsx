@@ -54,7 +54,7 @@ export const ProcedureDetailPage: React.FC<ProcedureDetailPageProps> = ({
       {/* =========================================================================
           BREADCRUMB & BACK NAVIGATION BAR (Clean, without rolling menus)
           ========================================================================= */}
-      <div className="border-b border-[#A59A91]/25 bg-[#FAF4EF]/95 backdrop-blur-md sticky top-20 z-30 shadow-xs">
+      <div className="border-b border-[#A59A91]/25 bg-white/10 backdrop-blur-lg sticky top-20 z-30 shadow-xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
           <button
             type="button"
@@ -109,7 +109,7 @@ export const ProcedureDetailPage: React.FC<ProcedureDetailPageProps> = ({
 
             {/* Key Clinical Indicators */}
             <div className="grid grid-cols-2 gap-4 py-3 max-w-md">
-              <div className="liquid-glass p-5 rounded-2xl border border-white/80 shadow-xs">
+              <div className="glass-card">
                 <Clock className="w-5 h-5 text-[#A74447] mb-2" />
                 <p className="text-2xl sm:text-3xl font-serif font-semibold text-[#28242C]">
                   {activeProcedure.stat1.number}
@@ -119,7 +119,7 @@ export const ProcedureDetailPage: React.FC<ProcedureDetailPageProps> = ({
                 </p>
               </div>
 
-              <div className="liquid-glass p-5 rounded-2xl border border-white/80 shadow-xs">
+              <div className="glass-card">
                 <CheckCircle2 className="w-5 h-5 text-[#A74447] mb-2" />
                 <p className="text-2xl sm:text-3xl font-serif font-semibold text-[#28242C]">
                   {activeProcedure.stat2.number}
@@ -174,7 +174,7 @@ export const ProcedureDetailPage: React.FC<ProcedureDetailPageProps> = ({
                 aria-hidden="true"
               />
               <div className="absolute bottom-6 left-6 right-6">
-                <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FAF4EF]/95 backdrop-blur-md text-[#28242C] text-xs font-semibold shadow-sm">
+                <span className="inline-flex items-center gap-2 px-3.5 py-1.5 glass-pill text-[#28242C] text-xs font-semibold shadow-sm">
                   <Sparkles className="w-3.5 h-3.5 text-[#A74447]" />
                   <span>Procedimento Clínico: {activeProcedure.name}</span>
                 </span>
@@ -209,7 +209,7 @@ export const ProcedureDetailPage: React.FC<ProcedureDetailPageProps> = ({
 
               {/* Technical badges */}
               <div className="pt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="liquid-glass p-4 rounded-xl border border-white flex items-start gap-3">
+                <div className="glass-card !p-4 flex items-start gap-3">
                   <Layers className="w-5 h-5 text-[#A74447] shrink-0 mt-0.5" />
                   <div>
                     <h4 className="text-xs font-semibold uppercase tracking-wider text-[#28242C]">
@@ -221,7 +221,7 @@ export const ProcedureDetailPage: React.FC<ProcedureDetailPageProps> = ({
                   </div>
                 </div>
 
-                <div className="liquid-glass p-4 rounded-xl border border-white flex items-start gap-3">
+                <div className="glass-card !p-4 flex items-start gap-3">
                   <HeartPulse className="w-5 h-5 text-[#A74447] shrink-0 mt-0.5" />
                   <div>
                     <h4 className="text-xs font-semibold uppercase tracking-wider text-[#28242C]">
@@ -236,7 +236,7 @@ export const ProcedureDetailPage: React.FC<ProcedureDetailPageProps> = ({
             </div>
 
             {/* Right Column: Para quem é indicado */}
-            <div className="lg:col-span-5 bg-[#F5E9DF] p-8 sm:p-10 border border-[#A59A91]/25 rounded-3xl shadow-sm space-y-6">
+            <div className="lg:col-span-5 glass-card space-y-6">
               <div className="space-y-2">
                 <span className="text-xs font-semibold uppercase tracking-widest text-[#A74447]">
                   Avaliação &amp; Diagnóstico
@@ -297,7 +297,7 @@ export const ProcedureDetailPage: React.FC<ProcedureDetailPageProps> = ({
               whileInView={{ y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="liquid-glass rounded-2xl p-6 flex flex-col justify-between border border-white/90 shadow-md hover:border-[#A74447]/40 transition-all duration-300"
+              className="glass-card flex flex-col justify-between transition-all duration-300 hover:scale-[1.01]"
             >
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
@@ -358,7 +358,7 @@ export const ProcedureDetailPage: React.FC<ProcedureDetailPageProps> = ({
             {activeProcedure.timeline.map((item, idx) => (
               <div
                 key={idx}
-                className="bg-[#F5E9DF] p-7 rounded-2xl border border-[#A59A91]/25 space-y-4 shadow-sm"
+                className="glass-card space-y-4"
               >
                 <div className="flex items-center gap-3">
                   <span className="w-8 h-8 rounded-full bg-[#A74447]/15 text-[#A74447] flex items-center justify-center font-bold text-xs">
@@ -402,7 +402,7 @@ export const ProcedureDetailPage: React.FC<ProcedureDetailPageProps> = ({
             return (
               <div
                 key={fIdx}
-                className="border border-[#A59A91]/25 bg-[#FAF4EF] rounded-xl overflow-hidden transition-all"
+                className="glass-card !p-0 overflow-hidden transition-all"
               >
                 <button
                   type="button"
@@ -444,7 +444,7 @@ export const ProcedureDetailPage: React.FC<ProcedureDetailPageProps> = ({
           SECTION 5: FINAL BOOKING CALLOUT
           ========================================================================= */}
       <section className="py-16 bg-[#FAF4EF] border-t border-[#A59A91]/25">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 glass-card text-center space-y-6">
           <div className="w-14 h-14 rounded-full bg-[#A74447]/15 text-[#A74447] flex items-center justify-center mx-auto">
             <ShieldCheck className="w-7 h-7" />
           </div>

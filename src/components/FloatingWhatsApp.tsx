@@ -24,7 +24,7 @@ export const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({
     >
       {/* Floating Tooltip Label (Desktop) */}
       <div
-        className={`hidden sm:flex items-center gap-2 bg-[#28242C] text-[#F5E9DF] text-xs font-semibold px-4 py-2.5 shadow-lg border border-[#A59A91]/30 transition-all duration-300 pointer-events-none ${
+        className={`hidden sm:flex items-center gap-2 glass-pill text-[#28242C] text-xs font-semibold px-4 py-2.5 shadow-md transition-all duration-300 pointer-events-none ${
           isTooltipVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-2'
         }`}
       >

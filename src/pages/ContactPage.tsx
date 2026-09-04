@@ -97,7 +97,7 @@ export const ContactPage: React.FC = () => {
             
             {/* Form Column */}
             <div className="lg:col-span-7">
-              <div className="border border-[#A59A91]/25 bg-[#FAF4EF] p-8 sm:p-12 space-y-8 shadow-sm">
+              <div className="glass-card space-y-8">
                 <div>
                   <h2
                     className="text-2xl sm:text-3xl font-serif font-medium text-[#28242C]"
@@ -111,7 +111,7 @@ export const ContactPage: React.FC = () => {
                 </div>
 
                 {isSubmitted ? (
-                  <div className="p-8 border border-[#A74447]/30 bg-[#F5E9DF] text-center space-y-4 shadow-sm">
+                  <div className="glass-card text-center space-y-4">
                     <div className="w-12 h-12 rounded-full bg-[#A74447] text-[#F5E9DF] flex items-center justify-center mx-auto">
                       <CheckCircle2 className="w-6 h-6" />
                     </div>
@@ -259,7 +259,7 @@ export const ContactPage: React.FC = () => {
             <div className="lg:col-span-5 space-y-8">
               
               {/* Location Card */}
-              <div className="border border-[#A59A91]/25 bg-[#FAF4EF] p-8 space-y-6 shadow-sm">
+              <div className="glass-card space-y-6">
                 <h3
                   className="text-2xl font-serif font-medium text-[#28242C]"
                   style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
@@ -319,14 +319,14 @@ export const ContactPage: React.FC = () => {
               </div>
 
               {/* WhatsApp Fast CTA Card */}
-              <div className="border border-[#28242C] bg-[#28242C] text-[#F5E9DF] p-8 space-y-4 shadow-sm">
+              <div className="glass-card space-y-4 text-[#28242C]">
                 <h4
-                  className="text-2xl font-serif text-[#F5E9DF]"
+                  className="text-2xl font-serif text-[#28242C]"
                   style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
                 >
                   Prefere agendar via WhatsApp?
                 </h4>
-                <p className="text-sm text-[#F5E9DF]/80 leading-relaxed">
+                <p className="text-sm text-[#28242C]/80 leading-relaxed">
                   Nossa concierge clínica está online de segunda a sábado para sanar dúvidas e verificar horários imediatos.
                 </p>
                 <div className="pt-2">
@@ -369,7 +369,7 @@ export const ContactPage: React.FC = () => {
               return (
                 <div
                   key={index}
-                  className="border border-[#A59A91]/25 bg-[#F5E9DF] transition-all shadow-sm"
+                  className="glass-card !p-0 overflow-hidden transition-all shadow-sm"
                 >
                   <button
                     type="button"

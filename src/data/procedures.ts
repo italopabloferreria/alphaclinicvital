@@ -424,7 +424,7 @@ export const PROCEDURES_CATALOG: readonly ProcedureData[] = [
     name: 'Ultrassom Liftera',
     categoryTag: 'Lifting & Contorno Facial',
     badge: 'Ultrassom Microfocado Digital',
-    image: '/procedures/bioestimuladores.jpg',
+    image: '/procedures/ultrassom-liftera.jpg',
     headline: 'Lifting não-invasivo com retração profunda da fáscia muscular',
     subtext:
       'Tecnologia de microfoco térmico que atinge a fáscia muscular (SMAS) promovendo efeito tensor duradouro, definição da mandíbula e elevação do terço médio.',
@@ -500,7 +500,7 @@ export const PROCEDURES_CATALOG: readonly ProcedureData[] = [
     name: 'Laser Lavieen',
     categoryTag: 'Luminosidade & Poros',
     badge: 'Tecnologia Glow Skin Fracionada',
-    image: '/procedures/limpeza-de-pele.jpg',
+    image: '/procedures/laser-lavieen.jpg',
     headline: 'O laser que uniformiza o tom da pele e recria o viço natural',
     subtext:
       'Laser fracionado não-ablativo de Tulio que restaura a textura, diminui poros abertos e atua no clareamento de melasmas com leve rubor de apenas 24h.',
@@ -576,7 +576,7 @@ export const PROCEDURES_CATALOG: readonly ProcedureData[] = [
     name: 'Remodelação Corporal 360°',
     categoryTag: 'Corpo & Firmeza Tecidual',
     badge: 'Protocolo Integrado de Contorno',
-    image: '/procedures/bioestimuladores.jpg',
+    image: '/procedures/remodelacao-corporal.jpg',
     headline: 'Definição e firmeza corporal com tecnologia não-invasiva',
     subtext:
       'Combinação clínica de radiofrequência multipolar, ultrassom cavitacional e ativos tensores para tratar celulite, flacidez e gordura localizada.',

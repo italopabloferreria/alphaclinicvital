@@ -24,73 +24,85 @@
 @media (prefers-reduced-motion: reduce){ .hero-anim,.hero-zoom{ animation:none; opacity:1; } }
 
 /* ==========================================================================
-   LIQUID GLASS MORPHISM UI
+   CANONICAL LIQUID GLASS DESIGN SYSTEM
    ========================================================================== */
+.glass-base {
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 1rem;
+}
+
+.glass-nav {
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 9999px;
+  padding: 0.375rem;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 1rem;
+  padding: 1.25rem;
+}
+@media (min-width: 640px) {
+  .glass-card {
+    padding: 1.5rem;
+  }
+}
+
+.glass-button-circle {
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 9999px;
+  height: 2.5rem;
+  width: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.glass-overlay {
+  background: rgba(0, 0, 0, 0.80);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.glass-drawer {
+  background: rgba(0, 0, 0, 0.90);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+.glass-pill {
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 9999px;
+}
+
+/* Backwards compatibility for liquid-glass references */
 .liquid-glass {
-  background: rgba(255, 255, 255, 0.45);
-  background-blend-mode: luminosity;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4);
-  position: relative;
-  overflow: hidden;
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 1rem;
 }
-
-.liquid-glass::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1.4px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.65) 0%, rgba(255,255,255,0.2) 20%, rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%, rgba(255,255,255,0.2) 80%, rgba(255,255,255,0.65) 100%);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-}
-
 .liquid-glass-strong {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(40px);
-  -webkit-backdrop-filter: blur(40px);
-  box-shadow: 4px 4px 12px rgba(40,36,44,0.06), inset 0 1px 1px rgba(255, 255, 255, 0.7);
-  position: relative;
-  overflow: hidden;
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 1rem;
 }
-
-.liquid-glass-strong::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1.4px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.35) 20%, rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%, rgba(255,255,255,0.35) 80%, rgba(255,255,255,0.85) 100%);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-}
-
 .liquid-glass-dark {
-  background: rgba(40, 36, 44, 0.75);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2);
-  position: relative;
-  overflow: hidden;
-}
-
-.liquid-glass-dark::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1.4px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.15) 20%, rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%, rgba(255,255,255,0.15) 80%, rgba(255,255,255,0.45) 100%);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
+  background: rgba(0, 0, 0, 0.80);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 1rem;
 }
 
 /* ==========================================================================
@@ -665,3 +677,199 @@
     transform: none;
   }
 }
+
+/* ==========================================================================
+   TREATMENT CARDS (GRID EDITORIAL)
+   ========================================================================== */
+.treatment-card {
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 1rem;
+  padding: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: transform 220ms ease;
+}
+
+@media (min-width: 640px) {
+  .treatment-card {
+    padding: 1.5rem;
+  }
+}
+
+.treatment-card:hover {
+  transform: translateY(-4px);
+}
+
+@keyframes cardsFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cards-fade-in {
+  animation: cardsFadeIn 240ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ==========================================================================
+   CLINIC CIRCULAR GLOW LOADER
+   ========================================================================== */
+.clinic-loader-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 220px;
+}
+
+.clinic-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: progress;
+  transform: scale(0.74);
+}
+
+.clinic-loader-central {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 10em;
+  height: 10em;
+  border-radius: 9999px;
+  box-shadow:
+    0.55em 1em 1.2em rgba(140, 75, 86, 0.50),
+    -0.55em 0.55em 1.1em rgba(180, 110, 121, 0.42),
+    0.55em -0.55em 1.15em rgba(215, 183, 176, 0.34),
+    -0.55em -0.55em 1.15em rgba(231, 217, 209, 0.34);
+}
+
+.clinic-loader-ring {
+  width: 10em;
+  height: 10em;
+  border-radius: 9999px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  animation: clinic-loader-rotate 3.3s linear infinite;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,0.10), transparent 56%),
+    radial-gradient(circle at 72% 68%, rgba(255,255,255,0.05), transparent 38%),
+    linear-gradient(180deg, #312927 0%, #241d1b 100%);
+  border: 1px solid rgba(247, 241, 236, 0.08);
+  box-shadow:
+    0.55em 0.55em 3em rgba(140, 75, 86, 0.45),
+    -0.55em 0.55em 3em rgba(180, 110, 121, 0.36),
+    0.55em -0.55em 3em rgba(215, 183, 176, 0.28),
+    -0.55em -0.55em 3em rgba(231, 217, 209, 0.28),
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    inset 0 -8px 16px rgba(0,0,0,0.18);
+}
+
+.clinic-loader-core {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 6.4em;
+  height: 6.4em;
+  border-radius: 9999px;
+  background:
+    radial-gradient(circle at 35% 35%, rgba(255,255,255,0.06), transparent 42%),
+    linear-gradient(180deg, #2b2321 0%, #211a18 100%);
+  border: 1px solid rgba(247, 241, 236, 0.06);
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,0.06),
+    0 10px 30px rgba(0,0,0,0.18);
+}
+
+.clinic-loader-label {
+  position: relative;
+  z-index: 3;
+  color: #f7f1ec;
+  font-size: 0.96rem;
+  letter-spacing: 0.03em;
+  font-weight: 500;
+}
+
+.clinic-loader-label::before {
+  content: "100%";
+  animation: clinic-loader-percent 2.2s ease-in-out infinite;
+}
+
+@keyframes clinic-loader-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(180deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes clinic-loader-percent {
+  0% {
+    content: "0%";
+  }
+
+  22% {
+    content: "22%";
+  }
+
+  35% {
+    content: "35%";
+  }
+
+  47% {
+    content: "47%";
+  }
+
+  59% {
+    content: "59%";
+  }
+
+  71% {
+    content: "71%";
+  }
+
+  84% {
+    content: "84%";
+  }
+
+  93% {
+    content: "93%";
+  }
+
+  98% {
+    content: "98%";
+  }
+
+  100% {
+    content: "100%";
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .clinic-loader-ring {
+    animation: none;
+  }
+
+  .clinic-loader-label::before {
+    content: "Carregando";
+    animation: none;
+  }
+}
+

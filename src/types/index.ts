@@ -15,6 +15,7 @@ export interface Service {
   title: string;
   description: string;
   icon: LucideIcon;
+  image?: string;
   tag?: string;
   category?: 'facial' | 'corporal' | 'laser';
   duration?: string;

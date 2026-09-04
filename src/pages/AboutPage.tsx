@@ -67,8 +67,8 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             
-            <div className="p-8 border border-[#A59A91]/25 bg-[#F5E9DF] space-y-3 shadow-sm">
-              <div className="w-10 h-10 border border-[#A74447]/30 bg-[#FAF4EF] text-[#A74447] flex items-center justify-center">
+            <div className="glass-card space-y-3">
+              <div className="glass-button-circle text-[#A74447]">
                 <Award className="w-5 h-5" />
               </div>
               <h3
@@ -83,8 +83,8 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
               </p>
             </div>
 
-            <div className="p-8 border border-[#A59A91]/25 bg-[#F5E9DF] space-y-3 shadow-sm">
-              <div className="w-10 h-10 border border-[#A74447]/30 bg-[#FAF4EF] text-[#A74447] flex items-center justify-center">
+            <div className="glass-card space-y-3">
+              <div className="glass-button-circle text-[#A74447]">
                 <Heart className="w-5 h-5" />
               </div>
               <h3
@@ -99,8 +99,8 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
               </p>
             </div>
 
-            <div className="p-8 border border-[#A59A91]/25 bg-[#F5E9DF] space-y-3 shadow-sm">
-              <div className="w-10 h-10 border border-[#A74447]/30 bg-[#FAF4EF] text-[#A74447] flex items-center justify-center">
+            <div className="glass-card space-y-3">
+              <div className="glass-button-circle text-[#A74447]">
                 <ShieldCheck className="w-5 h-5" />
               </div>
               <h3
@@ -115,8 +115,8 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
               </p>
             </div>
 
-            <div className="p-8 border border-[#A59A91]/25 bg-[#F5E9DF] space-y-3 shadow-sm">
-              <div className="w-10 h-10 border border-[#A74447]/30 bg-[#FAF4EF] text-[#A74447] flex items-center justify-center">
+            <div className="glass-card space-y-3">
+              <div className="glass-button-circle text-[#A74447]">
                 <Sparkles className="w-5 h-5" />
               </div>
               <h3
@@ -138,9 +138,9 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
 
       {/* Location Callout */}
       <section className="py-16 bg-[#F5E9DF]">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 border border-[#A59A91]/25 bg-[#FAF4EF] p-8 sm:p-12 text-center space-y-6 shadow-sm">
-          <div className="inline-flex p-3 bg-[#F5E9DF] text-[#A74447]">
-            <MapPin className="w-6 h-6" />
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 glass-card text-center space-y-6">
+          <div className="glass-button-circle text-[#A74447] mx-auto">
+            <MapPin className="w-5 h-5" />
           </div>
           <h3
             className="text-3xl font-serif text-[#28242C]"
