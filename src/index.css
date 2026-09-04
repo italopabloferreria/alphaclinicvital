@@ -1,11 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@1,400;1,500;1,600&family=Cormorant+Garamond:wght@400;500;600&family=Poppins:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Italiana&family=Manrope:wght@300;400;500;600;700&family=Marck+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@1,400;1,500;1,600&family=Cormorant+Garamond:wght@400;500;600&family=Poppins:wght@300;400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: clip;
+}
+
 * { font-family: 'Inter', sans-serif; }
 .font-playfair { font-family: 'Playfair Display', serif; }
+.font-instrument { font-family: 'Instrument Serif', serif; }
+.font-manrope { font-family: 'Manrope', sans-serif; }
+.font-italiana { font-family: 'Italiana', serif; }
+.font-marck { font-family: 'Marck Script', cursive; }
+
+.ease-entrance { transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1); }
+.ease-overlay { transition-timing-function: cubic-bezier(0.76, 0, 0.24, 1); }
 
 /* ==========================================================================
    HERO ANIMATIONS (Premium Load Transitions)
@@ -647,7 +665,7 @@
   }
   .site-footer {
     background-color: #F5E9DF;
-    background-image: url('/footer-poster.jpg');
+    background-image: url('/footer-poster.webp');
     background-position: center bottom;
     background-size: cover;
     background-repeat: no-repeat;

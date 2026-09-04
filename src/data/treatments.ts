@@ -7,7 +7,7 @@ export const TREATMENTS: readonly Service[] = [
     title: 'Bioestimuladores de Colágeno',
     tag: 'Mais Procurado',
     category: 'facial',
-    image: '/procedures/bioestimuladores.jpg',
+    image: '/procedures/bioestimuladores.webp',
     duration: '45 minutos',
     recovery: 'Imediata',
     description:
@@ -27,7 +27,7 @@ export const TREATMENTS: readonly Service[] = [
     title: 'Toxina Botulínica Preventiva',
     tag: 'Procedimento Rápido',
     category: 'facial',
-    image: '/procedures/botox.jpg',
+    image: '/procedures/botox.webp',
     duration: '30 minutos',
     recovery: 'Sem downtime',
     description:
@@ -47,7 +47,7 @@ export const TREATMENTS: readonly Service[] = [
     title: 'Ultrassom Microfocado Liftera',
     tag: 'Padrão Ouro',
     category: 'facial',
-    image: '/procedures/ultrassom-liftera.jpg',
+    image: '/procedures/ultrassom-liftera.webp',
     duration: '60 minutos',
     recovery: 'Retorno imediato às atividades',
     description:
@@ -67,7 +67,7 @@ export const TREATMENTS: readonly Service[] = [
     title: 'Laser Fracionado Lavieen',
     tag: 'Efeito Glow Skin',
     category: 'laser',
-    image: '/procedures/laser-lavieen.jpg',
+    image: '/procedures/laser-lavieen.webp',
     duration: '40 minutos',
     recovery: 'Leve rubor de 24h',
     description:
@@ -87,7 +87,7 @@ export const TREATMENTS: readonly Service[] = [
     title: 'Preenchimento com Ácido Hialurônico',
     tag: 'Resultado Imediato',
     category: 'facial',
-    image: '/procedures/preenchimento-labial.jpg',
+    image: '/procedures/preenchimento-labial.webp',
     duration: '50 minutos',
     recovery: '1 a 2 dias',
     description:
@@ -107,7 +107,7 @@ export const TREATMENTS: readonly Service[] = [
     title: 'Remodelação Corporal 360°',
     tag: 'Corpo & Contorno',
     category: 'corporal',
-    image: '/procedures/remodelacao-corporal.jpg',
+    image: '/procedures/remodelacao-corporal.webp',
     duration: '60 minutos',
     recovery: 'Sem restrições',
     description:

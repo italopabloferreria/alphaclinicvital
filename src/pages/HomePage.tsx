@@ -6,7 +6,7 @@ import { ProceduresSection } from '../components/ProceduresSection';
 import { InstagramFeedSection } from '../components/InstagramFeedSection';
 
 interface HomePageProps {
-  onNavigate: (route: PageRoute) => void;
+  onNavigate: (route: PageRoute, slug?: string) => void;
 }
 
 export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {

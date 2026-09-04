@@ -1,11 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
-  <!-- Stem and Leaves -->
-  <path d="M32 38V58" stroke="#A74447" stroke-width="3.5" stroke-linecap="round" />
-  <path d="M32 48C24 46 19 50 17 54" stroke="#A74447" stroke-width="3" stroke-linecap="round" />
-  <path d="M32 44C40 42 45 46 47 50" stroke="#A74447" stroke-width="3" stroke-linecap="round" />
-  
-  <!-- Flower Petals (Tulip) -->
-  <path d="M32 8C36 16 38 26 32 38C26 26 28 16 32 8Z" fill="#A74447" />
-  <path d="M32 38C22 36 13 26 15 15C23 17 29 26 32 38Z" fill="#DD9299" />
-  <path d="M32 38C42 36 51 26 49 15C41 17 35 26 32 38Z" fill="#DD9299" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Pétalas -->
+  <ellipse cx="32" cy="14" rx="7" ry="13" fill="#A74447" transform="rotate(0 32 32)"/>
+  <ellipse cx="32" cy="14" rx="7" ry="13" fill="#C0585C" transform="rotate(45 32 32)"/>
+  <ellipse cx="32" cy="14" rx="7" ry="13" fill="#A74447" transform="rotate(90 32 32)"/>
+  <ellipse cx="32" cy="14" rx="7" ry="13" fill="#C0585C" transform="rotate(135 32 32)"/>
+  <ellipse cx="32" cy="14" rx="7" ry="13" fill="#A74447" transform="rotate(180 32 32)"/>
+  <ellipse cx="32" cy="14" rx="7" ry="13" fill="#C0585C" transform="rotate(225 32 32)"/>
+  <ellipse cx="32" cy="14" rx="7" ry="13" fill="#A74447" transform="rotate(270 32 32)"/>
+  <ellipse cx="32" cy="14" rx="7" ry="13" fill="#C0585C" transform="rotate(315 32 32)"/>
+  <!-- Centro -->
+  <circle cx="32" cy="32" r="9" fill="#F5E9DF"/>
+  <circle cx="32" cy="32" r="6" fill="#A74447"/>
 </svg>

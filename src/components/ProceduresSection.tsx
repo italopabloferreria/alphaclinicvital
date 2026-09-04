@@ -15,42 +15,42 @@ const proceduresData: readonly ProcedureItem[] = [
   {
     name: "Limpeza de Pele",
     slug: "limpeza-de-pele",
-    image: "/procedures/limpeza-de-pele.jpg",
+    image: "/procedures/limpeza-de-pele.webp",
     description: "Higienização profunda para remover impurezas, controlar a oleosidade e revitalizar a pele.",
     icon: Droplets,
   },
   {
     name: "Botox",
     slug: "botox",
-    image: "/procedures/botox.jpg",
+    image: "/procedures/botox.webp",
     description: "Procedimento estético para suavizar linhas de expressão e proporcionar aparência mais descansada.",
     icon: Smile,
   },
   {
     name: "Preenchimento Labial",
     slug: "preenchimento-labial",
-    image: "/procedures/preenchimento-labial.jpg",
+    image: "/procedures/preenchimento-labial.webp",
     description: "Técnica voltada para volume, contorno e harmonização dos lábios com resultado natural.",
     icon: Heart,
   },
   {
     name: "Bioestimuladores",
     slug: "bioestimuladores",
-    image: "/procedures/bioestimuladores.jpg",
+    image: "/procedures/bioestimuladores.webp",
     description: "Tratamento que estimula a produção de colágeno e melhora firmeza, textura e sustentação da pele.",
     icon: Sparkles,
   },
   {
     name: "Peeling Químico",
     slug: "peeling-quimico",
-    image: "/procedures/peeling-quimico.jpg",
+    image: "/procedures/peeling-quimico.webp",
     description: "Renovação controlada da pele para melhorar manchas, textura, viço e uniformidade.",
     icon: ShieldCheck,
   },
 ];
 
 interface ProceduresSectionProps {
-  onNavigate?: (route: PageRoute) => void;
+  onNavigate?: (route: PageRoute, slug?: string) => void;
 }
 
 export const ProceduresSection: React.FC<ProceduresSectionProps> = ({ onNavigate }) => {
@@ -181,8 +181,7 @@ export const ProceduresSection: React.FC<ProceduresSectionProps> = ({ onNavigate
                 <button
                   type="button"
                   onClick={() => {
-                    window.location.hash = `#/procedimento/${current.slug}`;
-                    if (onNavigate) onNavigate('procedimento');
+                    if (onNavigate) onNavigate('procedimento', current.slug);
                   }}
                   className="inline-flex items-center gap-2 px-6 py-3.5 border border-[#28242C] text-[#28242C] hover:bg-[#28242C] hover:text-white text-xs uppercase tracking-widest font-semibold transition-all cursor-pointer rounded-none"
                 >

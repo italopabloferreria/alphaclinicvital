@@ -5,7 +5,7 @@ import { TREATMENTS } from '../data/treatments';
 import { getProcedureSlugForTreatmentId } from '../data/procedures';
 
 interface TreatmentsPageProps {
-  onNavigate: (route: PageRoute) => void;
+  onNavigate: (route: PageRoute, slug?: string) => void;
 }
 
 type FilterCategory = 'todos' | 'facial' | 'corporal' | 'laser';
@@ -189,8 +189,7 @@ export const TreatmentsPage: React.FC<TreatmentsPageProps> = ({ onNavigate }) =>
                             type="button"
                             onClick={() => {
                               const slug = getProcedureSlugForTreatmentId(treatment.id);
-                              window.location.hash = `#/procedimento/${slug}`;
-                              onNavigate('procedimento');
+                              onNavigate('procedimento', slug);
                             }}
                             className="w-full sm:w-auto px-5 py-3.5 rounded-xl border border-[#28242C]/25 text-[#28242C] hover:border-[#28242C] hover:bg-[#28242C]/5 text-xs font-semibold uppercase tracking-widest transition-all active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer"
                           >
@@ -296,8 +295,7 @@ export const TreatmentsPage: React.FC<TreatmentsPageProps> = ({ onNavigate }) =>
                       type="button"
                       onClick={() => {
                         const slug = getProcedureSlugForTreatmentId(treatment.id);
-                        window.location.hash = `#/procedimento/${slug}`;
-                        onNavigate('procedimento');
+                        onNavigate('procedimento', slug);
                       }}
                       className="w-full md:flex-1 py-3 px-3 rounded-xl border border-[#28242C]/25 text-[#28242C] hover:border-[#28242C] hover:bg-[#28242C]/5 text-[11px] lg:text-xs font-semibold uppercase tracking-wider transition-all active:scale-[0.98] flex items-center justify-center gap-1.5 cursor-pointer text-center"
                     >

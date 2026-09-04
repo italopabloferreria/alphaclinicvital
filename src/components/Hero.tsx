@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { PageRoute } from '../types';
-import frontImage from '../assets/front.jpeg';
-import backImage from '../assets/back.jpeg';
+import frontImage from '../assets/front.webp';
+import backImage from '../assets/back.webp';
 
 const BG_IMAGE_1 = frontImage;
 const BG_IMAGE_2 = backImage;
@@ -11,114 +11,56 @@ type CursorPoint = {
   y: number;
 };
 
-interface RevealLayerProps {
+type RevealLayerProps = {
   image: string;
   cursorX: number;
   cursorY: number;
   radius: number;
-  strength: number;
-}
+};
 
 /**
- * RevealLayer: Desenha o gradiente radial no canvas e aplica como máscara SVG/CSS
- * Suporta o controle dinâmico de opacidade (strength) e raio (radius) para desktop e mobile.
+ * [DESKTOP-ONLY]: RevealLayer
+ * Aplica máscara radial acelerada por GPU acompanhando o cursor do mouse
+ * sobre a imagem secundária (BG_IMAGE_2), sem sobrecarga de CPU ou canvas.
  */
-const RevealLayer: React.FC<RevealLayerProps> = ({
+function RevealLayer({
   image,
   cursorX,
   cursorY,
   radius,
-  strength,
-}) => {
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const [maskUrl, setMaskUrl] = useState<string>('');
-
-  useEffect(() => {
-    const updateCanvasSize = () => {
-      if (canvasRef.current) {
-        canvasRef.current.width = window.innerWidth;
-        canvasRef.current.height = window.innerHeight;
-      }
-    };
-
-    updateCanvasSize();
-    window.addEventListener('resize', updateCanvasSize);
-    return () => window.removeEventListener('resize', updateCanvasSize);
-  }, []);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    const width = canvas.width;
-    const height = canvas.height;
-
-    ctx.clearRect(0, 0, width, height);
-
-    // Se strength for 0 ou ponto fora de tela, limpa a máscara
-    if (strength <= 0 || cursorX < -100 || cursorY < -100) {
-      setMaskUrl('');
-      return;
-    }
-
-    const grad = ctx.createRadialGradient(cursorX, cursorY, 0, cursorX, cursorY, radius);
-    grad.addColorStop(0, `rgba(255, 255, 255, ${1 * strength})`);
-    grad.addColorStop(0.4, `rgba(255, 255, 255, ${1 * strength})`);
-    grad.addColorStop(0.6, `rgba(255, 255, 255, ${0.75 * strength})`);
-    grad.addColorStop(0.75, `rgba(255, 255, 255, ${0.4 * strength})`);
-    grad.addColorStop(0.88, `rgba(255, 255, 255, ${0.12 * strength})`);
-    grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
-
-    ctx.fillStyle = grad;
-    ctx.beginPath();
-    ctx.arc(cursorX, cursorY, radius, 0, Math.PI * 2);
-    ctx.fill();
-
-    setMaskUrl(canvas.toDataURL());
-  }, [cursorX, cursorY, radius, strength]);
+}: RevealLayerProps) {
+  const hasCursor = cursorX >= 0 && cursorY >= 0;
+  const maskStyle = hasCursor
+    ? `radial-gradient(circle ${radius}px at ${cursorX}px ${cursorY}px, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0.75) 60%, rgba(0,0,0,0.4) 75%, rgba(0,0,0,0.12) 88%, transparent 100%)`
+    : 'none';
 
   return (
-    <>
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 pointer-events-none"
-        style={{ display: 'none' }}
-      />
-      <div
-        className="absolute inset-0 bg-center bg-cover bg-no-repeat z-10 pointer-events-none hero-zoom"
-        style={{
-          backgroundImage: `url('${image}')`,
-          maskImage: maskUrl ? `url('${maskUrl}')` : 'none',
-          WebkitMaskImage: maskUrl ? `url('${maskUrl}')` : 'none',
-          maskSize: '100% 100%',
-          WebkitMaskSize: '100% 100%',
-          maskRepeat: 'no-repeat',
-          WebkitMaskRepeat: 'no-repeat',
-          opacity: maskUrl ? 1 : 0,
-        }}
-      />
-    </>
+    <div
+      className="pointer-events-none absolute inset-0 z-10 bg-center bg-cover bg-no-repeat hero-zoom"
+      style={{
+        backgroundImage: `url('${image}')`,
+        WebkitMaskImage: maskStyle,
+        maskImage: maskStyle,
+        WebkitMaskRepeat: 'no-repeat',
+        maskRepeat: 'no-repeat',
+      }}
+    />
   );
-};
+}
 
 interface HeroProps {
-  onNavigate?: (route: PageRoute) => void;
+  onNavigate?: (route: PageRoute, slug?: string) => void;
 }
 
 export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
-  const sectionRef = useRef<HTMLElement | null>(null);
-
   const mouse = useRef<CursorPoint>({ x: -999, y: -999 });
   const smooth = useRef<CursorPoint>({ x: -999, y: -999 });
   const rafRef = useRef<number | null>(null);
-  const fadeRafRef = useRef<number | null>(null);
 
   const [cursorPos, setCursorPos] = useState<CursorPoint>({ x: -999, y: -999 });
-  const [revealStrength, setRevealStrength] = useState<number>(1);
+  const [mobileRevealed, setMobileRevealed] = useState<boolean>(false);
 
-  // [MOBILE-ONLY]: Detecção refinada de toque/ponteiro grosso
+  // [REGRAS DE DETECÇÃO]: Considera touch/mobile somente sob as condições especificadas
   const isTouchDevice = useMemo(() => {
     if (typeof window === 'undefined') return false;
     return (
@@ -127,177 +69,103 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
     );
   }, []);
 
-  // [ACESSIBILIDADE]: Respeito à preferência de redução de movimento do sistema
+  // [ACESSIBILIDADE]: Respeita preferência por redução de movimento
   const prefersReducedMotion = useMemo(() => {
     if (typeof window === 'undefined') return false;
     return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   }, []);
 
-  // Raio adaptado: menor no mobile para toque preciso, amplo no desktop para mouse suave
-  const SPOTLIGHT_R = isTouchDevice ? 155 : 260;
+  const SPOTLIGHT_R = 260;
 
   // [DESKTOP-ONLY]: Acompanhamento contínuo de cursor via mousemove + RAF smoothing
   useEffect(() => {
     if (typeof window === 'undefined') return;
+    if (isTouchDevice) return;
 
-    if (isTouchDevice) {
-      mouse.current = { x: -999, y: -999 };
-      smooth.current = { x: -999, y: -999 };
-      setCursorPos({ x: -999, y: -999 });
-      setRevealStrength(0);
-      return;
-    }
-
-    setRevealStrength(1);
+    let active = true;
 
     const handleMouseMove = (e: MouseEvent) => {
       mouse.current = { x: e.clientX, y: e.clientY };
-      if (smooth.current.x === -999) {
-        smooth.current = { x: e.clientX, y: e.clientY };
-      }
     };
 
     const animate = () => {
-      if (mouse.current.x !== -999) {
-        smooth.current.x += (mouse.current.x - smooth.current.x) * 0.1;
-        smooth.current.y += (mouse.current.y - smooth.current.y) * 0.1;
+      if (!active) return;
+      const dx = Math.abs(mouse.current.x - smooth.current.x);
+      const dy = Math.abs(mouse.current.y - smooth.current.y);
+      if (dx > 0.15 || dy > 0.15) {
+        smooth.current.x += (mouse.current.x - smooth.current.x) * 0.15;
+        smooth.current.y += (mouse.current.y - smooth.current.y) * 0.15;
         setCursorPos({ x: smooth.current.x, y: smooth.current.y });
       }
       rafRef.current = requestAnimationFrame(animate);
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
     rafRef.current = requestAnimationFrame(animate);
 
     return () => {
+      active = false;
       window.removeEventListener('mousemove', handleMouseMove);
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
   }, [isTouchDevice]);
 
-  // [MOBILE-ONLY]: Lógica de toque touch (pointerdown, pointermove, pointerup, pointercancel)
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
+  // [MOBILE-ONLY]: Toque alterna entre imagem base e imagem secundária inteira com fade suave
+  const handleMobileRevealToggle = () => {
     if (!isTouchDevice) return;
-
-    const section = sectionRef.current;
-    if (!section) return;
-
-    let hideTimeout: number | null = null;
-
-    const stopFade = () => {
-      if (fadeRafRef.current) {
-        cancelAnimationFrame(fadeRafRef.current);
-        fadeRafRef.current = null;
-      }
-      if (hideTimeout) {
-        window.clearTimeout(hideTimeout);
-        hideTimeout = null;
-      }
-    };
-
-    // Animação suave de saída após soltar o toque
-    const fadeOut = () => {
-      stopFade();
-
-      if (prefersReducedMotion) {
-        setRevealStrength(0);
-        return;
-      }
-
-      let current = 1;
-
-      const step = () => {
-        current -= 0.07;
-        if (current <= 0) {
-          setRevealStrength(0);
-          fadeRafRef.current = null;
-          return;
-        }
-        setRevealStrength(current);
-        fadeRafRef.current = requestAnimationFrame(step);
-      };
-
-      fadeRafRef.current = requestAnimationFrame(step);
-    };
-
-    const activateAt = (clientX: number, clientY: number) => {
-      stopFade();
-
-      mouse.current = { x: clientX, y: clientY };
-      smooth.current = { x: clientX, y: clientY };
-      setCursorPos({ x: clientX, y: clientY });
-      setRevealStrength(1);
-    };
-
-    const handlePointerDown = (e: PointerEvent) => {
-      activateAt(e.clientX, e.clientY);
-    };
-
-    const handlePointerMove = (e: PointerEvent) => {
-      if (e.pointerType !== 'touch') return;
-      activateAt(e.clientX, e.clientY);
-    };
-
-    const handlePointerUp = () => {
-      hideTimeout = window.setTimeout(() => {
-        fadeOut();
-      }, 180);
-    };
-
-    const handlePointerCancel = () => {
-      fadeOut();
-    };
-
-    section.addEventListener('pointerdown', handlePointerDown, { passive: true });
-    section.addEventListener('pointermove', handlePointerMove, { passive: true });
-    section.addEventListener('pointerup', handlePointerUp, { passive: true });
-    section.addEventListener('pointercancel', handlePointerCancel, { passive: true });
-
-    return () => {
-      section.removeEventListener('pointerdown', handlePointerDown);
-      section.removeEventListener('pointermove', handlePointerMove);
-      section.removeEventListener('pointerup', handlePointerUp);
-      section.removeEventListener('pointercancel', handlePointerCancel);
-
-      stopFade();
-    };
-  }, [isTouchDevice, prefersReducedMotion]);
+    setMobileRevealed((prev) => !prev);
+  };
 
   return (
-    <div className="relative z-0 w-full tracking-[-0.02em]" style={{ fontFamily: "'Inter', sans-serif" }}>
-      {/* Main Fullscreen Hero Section com touch-action: manipulation */}
+    <div
+      className="relative z-0 w-full tracking-[-0.02em]"
+      style={{ fontFamily: "'Inter', sans-serif" }}
+    >
+      {/* Hero Container: No mobile, toque na hero alterna a revelação da imagem */}
       <section
-        ref={sectionRef}
+        onClick={handleMobileRevealToggle}
         className="relative w-full overflow-hidden bg-black select-none"
         style={{ height: 'calc(100vh - 5rem)', minHeight: '580px', touchAction: 'manipulation' }}
       >
-        {/* Layer 1: Base Image (z-0) with Slow Ken Burns Zoom */}
+        {/* Layer 1: Imagem Base (BG_IMAGE_1) com Ken Burns zoom suave */}
         <div
-          className="absolute inset-0 bg-center bg-cover bg-no-repeat z-0 hero-zoom"
+          className="hero-zoom absolute inset-0 z-0 bg-center bg-cover bg-no-repeat"
           style={{ backgroundImage: `url('${BG_IMAGE_1}')` }}
         />
 
-        {/* Layer 2: Reveal Layer (z-10) */}
-        <RevealLayer
-          image={BG_IMAGE_2}
-          cursorX={cursorPos.x}
-          cursorY={cursorPos.y}
-          radius={SPOTLIGHT_R}
-          strength={revealStrength}
-        />
+        {/* Layer 2 [DESKTOP-ONLY]: Spotlight circular com canvas radial mask que segue o cursor */}
+        {!isTouchDevice && (
+          <RevealLayer
+            image={BG_IMAGE_2}
+            cursorX={cursorPos.x}
+            cursorY={cursorPos.y}
+            radius={SPOTLIGHT_R}
+          />
+        )}
 
-        {/* Layer 3: Heading (z-20) */}
-        <div className="absolute top-[18%] sm:top-[22%] left-0 right-0 flex flex-col items-center text-center px-5 pointer-events-none z-20">
-          <h1 className="text-white leading-[0.95]">
+        {/* Layer 2 [MOBILE-ONLY]: Full-image reveal por toque (fade suave com opacidade, sem spotlight) */}
+        {isTouchDevice && (
+          <div
+            className={`absolute inset-0 z-10 bg-center bg-cover bg-no-repeat ${
+              prefersReducedMotion ? '' : 'transition-opacity duration-500 ease-out'
+            } ${mobileRevealed ? 'opacity-100' : 'opacity-0'}`}
+            style={{
+              backgroundImage: `url('${BG_IMAGE_2}')`,
+            }}
+          />
+        )}
+
+        {/* Layer 3: Tipografia de Título Principal */}
+        <div className="pointer-events-none absolute left-0 right-0 top-[18%] sm:top-[22%] z-20 flex flex-col items-center px-5 text-center">
+          <h1 className="leading-[0.95] text-white">
             <span
-              className="block font-playfair italic font-normal text-5xl sm:text-7xl md:text-8xl hero-anim hero-reveal"
+              className="hero-anim hero-reveal block font-playfair text-5xl font-normal italic sm:text-7xl md:text-8xl"
               style={{ letterSpacing: '-0.05em', animationDelay: '0.25s' }}
             >
               Retoque na
             </span>
             <span
-              className="block font-normal text-5xl sm:text-7xl md:text-8xl -mt-1 hero-anim hero-reveal"
+              className="hero-anim hero-reveal -mt-1 block text-5xl font-normal sm:text-7xl md:text-8xl"
               style={{ letterSpacing: '-0.08em', animationDelay: '0.42s' }}
             >
               medida certa.
@@ -305,42 +173,45 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           </h1>
         </div>
 
-        {/* Layer 4: Bottom-left block (z-20) */}
+        {/* Layer 4: Descrição Inferior Esquerda (Desktop/Tablet) */}
         <div
-          className="hidden sm:block absolute bottom-12 left-8 md:left-14 max-w-[320px] z-20 hero-anim hero-fade pointer-events-auto"
+          className="hero-anim hero-fade pointer-events-auto absolute bottom-12 left-8 z-20 hidden max-w-[320px] sm:block md:left-14"
           style={{ animationDelay: '0.7s' }}
         >
-          <div className="glass-card text-white border border-white/15">
-            <p className="text-xs sm:text-sm text-white/90 leading-relaxed font-light">
+          <div className="glass-card border border-white/15 text-white">
+            <p className="text-xs font-light leading-relaxed text-white/90 sm:text-sm">
               Medicina estética de alto padrão com atendimento exclusivo e protocolos personalizados no Jardim Botânico, Brasília.
             </p>
           </div>
         </div>
 
-        {/* Layer 5: Bottom-right block (z-20) */}
+        {/* Layer 5: Card de Ação Inferior Direito com CTA */}
         <div
-          className="absolute bottom-10 sm:bottom-12 left-5 right-5 sm:left-auto sm:right-8 md:right-14 max-w-full sm:max-w-[320px] z-20 hero-anim hero-fade pointer-events-auto"
+          className="hero-anim hero-fade pointer-events-auto absolute bottom-10 left-5 right-5 z-20 max-w-full sm:bottom-12 sm:left-auto sm:right-8 sm:max-w-[320px] md:right-14"
           style={{ animationDelay: '0.85s' }}
         >
-          <div className="glass-card text-white border border-white/15 flex flex-col items-start gap-3 sm:gap-4">
-            <p className="text-xs sm:text-sm text-white/90 leading-relaxed font-light">
+          <div className="glass-card flex flex-col items-start gap-3 border border-white/15 text-white sm:gap-4">
+            <p className="text-xs font-light leading-relaxed text-white/90 sm:text-sm">
               Realce sua essência com naturalidade, sofisticação e tecnologia médica de ponta.
             </p>
             <button
               type="button"
-              onClick={() => onNavigate?.('contato')}
-              className="inline-flex items-center gap-2 bg-[#A74447] hover:bg-[#8F393C] text-[#F5E9DF] text-xs uppercase tracking-widest font-semibold px-6 py-3 rounded-full transition-all hover:scale-[1.02] active:scale-95 shadow-md cursor-pointer w-full sm:w-auto justify-center"
+              onClick={(e) => {
+                e.stopPropagation();
+                onNavigate?.('contato');
+              }}
+              className="inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-[#A74447] px-6 py-3 text-xs font-semibold uppercase tracking-widest text-[#F5E9DF] shadow-md transition-all hover:scale-[1.02] hover:bg-[#8F393C] active:scale-95 sm:w-auto"
             >
               <span>Agendar Avaliação</span>
             </button>
           </div>
         </div>
 
-        {/* [MOBILE-ONLY]: Indicador visual discreto de toque no mobile */}
+        {/* [MOBILE-ONLY]: Indicador de toque na base da hero */}
         {isTouchDevice && (
           <div className="pointer-events-none absolute inset-x-0 bottom-24 z-20 flex justify-center px-6 sm:hidden">
-            <div className="glass-pill px-4 py-1.5 text-[11px] tracking-[0.08em] text-white/80 shadow-xs">
-              Toque para revelar
+            <div className="rounded-full border border-white/10 bg-black/40 px-4 py-2 text-[11px] tracking-[0.08em] text-white/90 shadow-[0_8px_24px_rgba(0,0,0,0.22)] backdrop-blur-sm">
+              {mobileRevealed ? 'Toque novamente' : 'Toque para revelar'}
             </div>
           </div>
         )}
@@ -350,3 +221,4 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
 };
 
 export default Hero;
+

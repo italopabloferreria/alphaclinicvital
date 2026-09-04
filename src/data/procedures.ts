@@ -43,7 +43,7 @@ export const PROCEDURES_CATALOG: readonly ProcedureData[] = [
     name: 'Limpeza de Pele',
     categoryTag: 'Higienização & Vitalidade',
     badge: 'Protocolo de Entrada Mais Solicitado',
-    image: '/procedures/limpeza-de-pele.jpg',
+    image: '/procedures/limpeza-de-pele.webp',
     headline: 'Purificação profunda e luminosidade imediata para sua pele',
     subtext:
       'Higienização dérmica avançada com desobstrução atraumática de poros, emoliência controlada e nutrição celular para revitalizar o viço natural da face.',
@@ -119,7 +119,7 @@ export const PROCEDURES_CATALOG: readonly ProcedureData[] = [
     name: 'Botox (Toxina Botulínica)',
     categoryTag: 'Suavização & Harmonia Facial',
     badge: 'Tratamento Médico Padrão Ouro',
-    image: '/procedures/botox.jpg',
+    image: '/procedures/botox.webp',
     headline: 'Expressão leve, descansada e naturalmente rejuvenescida',
     subtext:
       'Atenuação precisa de linhas na testa, glabela e pés de galinha. Preservamos sua mímica facial para que o resultado seja elegante, espontâneo e invisível aos outros.',
@@ -196,7 +196,7 @@ export const PROCEDURES_CATALOG: readonly ProcedureData[] = [
     name: 'Preenchimento Labial',
     categoryTag: 'Definição & Hidratação Dérmica',
     badge: 'Ácido Hialurônico de Pureza Suíça',
-    image: '/procedures/preenchimento-labial.jpg',
+    image: '/procedures/preenchimento-labial.webp',
     headline: 'Contorno esculpido com volume delicado e proporção áurea',
     subtext:
       'Harmonização labial com foco em contorno, projeção do arco do cupido e hidratação profunda. Resultados proporcionais que respeitam o desenho natural da sua boca.',
@@ -272,7 +272,7 @@ export const PROCEDURES_CATALOG: readonly ProcedureData[] = [
     name: 'Bioestimuladores de Colágeno',
     categoryTag: 'Firmeza & Neocolagênese',
     badge: 'Regeneração Estrutural Profunda',
-    image: '/procedures/bioestimuladores.jpg',
+    image: '/procedures/bioestimuladores.webp',
     headline: 'Estímulo biológico contínuo que restaura a firmeza do seu rosto',
     subtext:
       'Tratamento biotecnológico que desperta a produção própria de colágeno pelo organismo, recuperando a espessura dérmica e combatendo a flacidez de dentro para fora.',
@@ -348,7 +348,7 @@ export const PROCEDURES_CATALOG: readonly ProcedureData[] = [
     name: 'Peeling Químico',
     categoryTag: 'Renovação & Luminosidade',
     badge: 'Uniformização Médica de Manchas',
-    image: '/procedures/peeling-quimico.jpg',
+    image: '/procedures/peeling-quimico.webp',
     headline: 'Renovação celular programada para textura e tom homogêneos',
     subtext:
       'Aplicação de ácidos médicos com concentrações personalizadas para suavizar melasma, linhas finas e cicatrizes de acne, revelando uma pele acetinada e luminosa.',
@@ -424,7 +424,7 @@ export const PROCEDURES_CATALOG: readonly ProcedureData[] = [
     name: 'Ultrassom Liftera',
     categoryTag: 'Lifting & Contorno Facial',
     badge: 'Ultrassom Microfocado Digital',
-    image: '/procedures/ultrassom-liftera.jpg',
+    image: '/procedures/ultrassom-liftera.webp',
     headline: 'Lifting não-invasivo com retração profunda da fáscia muscular',
     subtext:
       'Tecnologia de microfoco térmico que atinge a fáscia muscular (SMAS) promovendo efeito tensor duradouro, definição da mandíbula e elevação do terço médio.',
@@ -500,7 +500,7 @@ export const PROCEDURES_CATALOG: readonly ProcedureData[] = [
     name: 'Laser Lavieen',
     categoryTag: 'Luminosidade & Poros',
     badge: 'Tecnologia Glow Skin Fracionada',
-    image: '/procedures/laser-lavieen.jpg',
+    image: '/procedures/laser-lavieen.webp',
     headline: 'O laser que uniformiza o tom da pele e recria o viço natural',
     subtext:
       'Laser fracionado não-ablativo de Tulio que restaura a textura, diminui poros abertos e atua no clareamento de melasmas com leve rubor de apenas 24h.',
@@ -576,7 +576,7 @@ export const PROCEDURES_CATALOG: readonly ProcedureData[] = [
     name: 'Remodelação Corporal 360°',
     categoryTag: 'Corpo & Firmeza Tecidual',
     badge: 'Protocolo Integrado de Contorno',
-    image: '/procedures/remodelacao-corporal.jpg',
+    image: '/procedures/remodelacao-corporal.webp',
     headline: 'Definição e firmeza corporal com tecnologia não-invasiva',
     subtext:
       'Combinação clínica de radiofrequência multipolar, ultrassom cavitacional e ativos tensores para tratar celulite, flacidez e gordura localizada.',

@@ -5,10 +5,15 @@ export type PageRoute =
   | 'tratamentos' 
   | 'sobre' 
   | 'contato' 
-  | 'procedimento'
+  | 'procedimento' 
+  | 'clube'
   | 'privacidade' 
   | 'termos' 
-  | 'cookies';
+  | 'cookies'
+  | 'copyright';
+
+export type NavigateFn = (route: PageRoute, slug?: string) => void;
+
 
 export interface Service {
   id: string;

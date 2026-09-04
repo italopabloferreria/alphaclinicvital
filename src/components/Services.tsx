@@ -145,7 +145,7 @@ export const Services: React.FC = () => {
             </p>
           </div>
           <a
-            href="#contato"
+            href="/contato"
             className="shrink-0 px-6 py-3 rounded-xl bg-[#A74447] hover:bg-[#8B3437] text-white font-semibold text-sm active:scale-95 transition-all shadow-sm"
           >
             Conversar com um Especialista

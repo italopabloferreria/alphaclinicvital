@@ -24,7 +24,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           loop
           playsInline
           preload="auto"
-          poster="/footer-poster.jpg"
+          poster="/footer-poster.webp"
         >
           <source
             src="/footer.mp4"
@@ -92,32 +92,32 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <h3 className="col-title">Tratamentos</h3>
             <ul className="link-list">
               <li>
-                <a href="#tratamentos" onClick={(e) => handleNav(e, 'tratamentos')}>
+                <a href="/tratamentos" onClick={(e) => handleNav(e, 'tratamentos')}>
                   Bioestimuladores
                 </a>
               </li>
               <li>
-                <a href="#tratamentos" onClick={(e) => handleNav(e, 'tratamentos')}>
+                <a href="/tratamentos" onClick={(e) => handleNav(e, 'tratamentos')}>
                   Toxina Botulínica
                 </a>
               </li>
               <li>
-                <a href="#tratamentos" onClick={(e) => handleNav(e, 'tratamentos')}>
+                <a href="/tratamentos" onClick={(e) => handleNav(e, 'tratamentos')}>
                   Ultrassom Liftera
                 </a>
               </li>
               <li>
-                <a href="#tratamentos" onClick={(e) => handleNav(e, 'tratamentos')}>
+                <a href="/tratamentos" onClick={(e) => handleNav(e, 'tratamentos')}>
                   Laser Lavieen
                 </a>
               </li>
               <li>
-                <a href="#tratamentos" onClick={(e) => handleNav(e, 'tratamentos')}>
+                <a href="/tratamentos" onClick={(e) => handleNav(e, 'tratamentos')}>
                   Preenchimento Facial
                 </a>
               </li>
               <li>
-                <a href="#tratamentos" onClick={(e) => handleNav(e, 'tratamentos')}>
+                <a href="/tratamentos" onClick={(e) => handleNav(e, 'tratamentos')}>
                   Remodelação Corporal
                 </a>
               </li>
@@ -129,27 +129,27 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <h3 className="col-title">A Clínica</h3>
             <ul className="link-list">
               <li>
-                <a href="#sobre" onClick={(e) => handleNav(e, 'sobre')}>
+                <a href="/sobre" onClick={(e) => handleNav(e, 'sobre')}>
                   Nossa Essência
                 </a>
               </li>
               <li>
-                <a href="#sobre" onClick={(e) => handleNav(e, 'sobre')}>
+                <a href="/sobre" onClick={(e) => handleNav(e, 'sobre')}>
                   Corpo Clínico
                 </a>
               </li>
               <li>
-                <a href="#sobre" onClick={(e) => handleNav(e, 'sobre')}>
+                <a href="/sobre" onClick={(e) => handleNav(e, 'sobre')}>
                   Tecnologia Médica
                 </a>
               </li>
               <li>
-                <a href="#sobre" onClick={(e) => handleNav(e, 'sobre')}>
+                <a href="/sobre" onClick={(e) => handleNav(e, 'sobre')}>
                   Espaço VIP &amp; Spa
                 </a>
               </li>
               <li>
-                <a href="#sobre" onClick={(e) => handleNav(e, 'sobre')}>
+                <a href="/sobre" onClick={(e) => handleNav(e, 'sobre')}>
                   Diferenciais
                 </a>
               </li>
@@ -161,17 +161,17 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <h3 className="col-title">Cuidado &amp; Atendimento</h3>
             <ul className="link-list">
               <li>
-                <a href="#contato" onClick={(e) => handleNav(e, 'contato')}>
+                <a href="/contato" onClick={(e) => handleNav(e, 'contato')}>
                   Agendamento VIP
                 </a>
               </li>
               <li>
-                <a href="#contato" onClick={(e) => handleNav(e, 'contato')}>
+                <a href="/contato" onClick={(e) => handleNav(e, 'contato')}>
                   Avaliação Facial
                 </a>
               </li>
               <li>
-                <a href="#contato" onClick={(e) => handleNav(e, 'contato')}>
+                <a href="/contato" onClick={(e) => handleNav(e, 'contato')}>
                   Onde Estamos
                 </a>
               </li>
@@ -226,14 +226,22 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         {/* Bottom Bar */}
         <div className="footer-bottom">
           <nav className="legal" aria-label="Informações Legais">
-            <a href="#privacidade" onClick={(e) => handleNav(e, 'privacidade')}>
+            <a href="/privacidade" onClick={(e) => handleNav(e, 'privacidade')}>
               Política de Privacidade
             </a>
-            <a href="#termos" onClick={(e) => handleNav(e, 'termos')}>
+            <a href="/termos" onClick={(e) => handleNav(e, 'termos')}>
               Termos de Uso
             </a>
-            <a href="#cookies" onClick={(e) => handleNav(e, 'cookies')}>
+            <a href="/cookies" onClick={(e) => handleNav(e, 'cookies')}>
               Política de Cookies
+            </a>
+            <a
+              href="/copyright"
+              onClick={(e) => handleNav(e, 'copyright')}
+              className="text-[#A59A91]/80 hover:text-[#A74447] transition-colors cursor-pointer"
+              title="Copyright - I can't believe it's ai"
+            >
+              © Copyright
             </a>
           </nav>
         </div>

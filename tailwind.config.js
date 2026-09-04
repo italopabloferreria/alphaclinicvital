@@ -12,6 +12,14 @@ export default {
         geist: ['Geist', 'system-ui', 'sans-serif'],
         heading: ["'Instrument Serif'", 'Cormorant Garamond', 'serif'],
         body: ["'Barlow'", "'Poppins'", 'sans-serif'],
+        instrument: ["'Instrument Serif'", 'serif'],
+        manrope: ['Manrope', 'sans-serif'],
+        italiana: ['Italiana', 'serif'],
+        marck: ['"Marck Script"', 'cursive'],
+      },
+      transitionTimingFunction: {
+        entrance: 'cubic-bezier(0.16, 1, 0.3, 1)',
+        overlay: 'cubic-bezier(0.76, 0, 0.24, 1)',
       },
       colors: {
         brand: {

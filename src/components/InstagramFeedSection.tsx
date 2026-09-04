@@ -13,7 +13,7 @@ interface InstagramPost {
 const INSTAGRAM_POSTS: readonly InstagramPost[] = [
   {
     id: 'post-1',
-    image: '/procedures/limpeza-de-pele.jpg',
+    image: '/procedures/limpeza-de-pele.webp',
     caption: 'O cuidado com a pele começa na base: higienização profunda e recuperação do viço biológico sem agressão. ✨ #AlphaClinicVital #SkincareBrasilia',
     likes: 142,
     comments: 18,
@@ -21,7 +21,7 @@ const INSTAGRAM_POSTS: readonly InstagramPost[] = [
   },
   {
     id: 'post-2',
-    image: '/procedures/botox.jpg',
+    image: '/procedures/botox.webp',
     caption: 'Naturalidade é quando ninguém percebe o procedimento, apenas nota que você está mais descansada e radiante. Protocolo de toxina preventiva no AlphaCenter.',
     likes: 218,
     comments: 27,
@@ -29,7 +29,7 @@ const INSTAGRAM_POSTS: readonly InstagramPost[] = [
   },
   {
     id: 'post-3',
-    image: '/procedures/preenchimento-labial.jpg',
+    image: '/procedures/preenchimento-labial.webp',
     caption: 'Harmonização labial focada em contorno, hidratação profunda e proporção áurea. Menos volume, mais elegância e sofisticação.',
     likes: 189,
     comments: 24,
@@ -37,7 +37,7 @@ const INSTAGRAM_POSTS: readonly InstagramPost[] = [
   },
   {
     id: 'post-4',
-    image: '/procedures/bioestimuladores.jpg',
+    image: '/procedures/bioestimuladores.webp',
     caption: 'Estímulo de colágeno progressivo: seu próprio organismo renovando a firmeza da pele pelos próximos 24 meses. Tecnologia padrão ouro.',
     likes: 276,
     comments: 35,
@@ -45,7 +45,7 @@ const INSTAGRAM_POSTS: readonly InstagramPost[] = [
   },
   {
     id: 'post-5',
-    image: '/procedures/peeling-quimico.jpg',
+    image: '/procedures/peeling-quimico.webp',
     caption: 'Uniformidade de tom, textura aveludada e clareamento de manchas solares com renovação celular médica programada.',
     likes: 164,
     comments: 19,
